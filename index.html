@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<title>Is Young's Crossing Closed?</title>
+<html>
+<script src="confetti.min.js"></script>
+<style>
+.gradient {
+	background: rgb(23, 23, 23);
+}	
+@font-face {
+  font-family: bolded;
+  src: url("fonts/Nunito-VariableFont_wght.ttf");
+  font-weight: bold;
+  
+  
+}
+@font-face {
+  font-family: normals;
+  src: url("fonts/Nunito-VariableFont_wght.ttf"); 
+  
+}
+.font {
+  font-family: bolded;
+  text-align: center;
+  font-size: 900%;
+  margin-top: -5%;
+  margin-bottom: -0.5%;
+
+}
+.font1 {
+  margin-top: -1%;
+  margin-bottom: 3.3%;
+  font-family: bolded;
+  text-align: center;
+  color: white;
+  font-size: 400%;
+}
+.font2 {
+  font-family: normals;
+  text-align: center;
+  color: white;
+  font-size: 210%;
+}
+.font3 {
+  font-family: normals;
+  text-align: center;
+  color: white;
+  font-size: 90%; 
+}
+hr {
+  border:none;
+  border-top:5px dashed whitesmoke;
+  color:whitesmoke;
+  background-color:rgb(23, 23, 23);
+  height:0.1px;
+  width:50%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+}
+</style>
+<body class="gradient">
+	<br><br><br>
+<p class="font1">Young's Crossing is</p>
+
+	
+<p id="demo" class="font"></p>
+
+<div id="reason" class="font2">
+</div>	
+<a style="position: absolute; bottom: 20px; margin-left: 45%; margin-right: 44%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
+
+<script>
+
+rep=0
+
+loadXMLDoc();
+setInterval(loadXMLDoc, 2000); // 2 seconds.
+
+const start = () => {
+	setTimeout(function() {
+		confetti.start()
+	}, 800);
+};
+
+//  Stop
+
+const stop = () => {
+	setTimeout(function() {
+		confetti.stop()
+	}, 3000);
+};
+function loadXMLDoc() {
+	var xmlhttp = new XMLHttpRequest();
+	txt="";
+
+	xmlhttp.onreadystatechange = function() {
+
+	  if (this.readyState == 4 && this.status == 200) {
+		myObj = JSON.parse(this.responseText);
+		var i;
+		txt = myObj.features[0].attributes.STATUS;
+		time = myObj.features[0].attributes.UPDATETIME;
+		var utcSeconds = time;
+		var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		d.setUTCMilliseconds(Date.now()-utcSeconds);
+		if ((d.getHours()-10)==1){
+		letter="";
+		}else{
+		letter="s";
+		}
+		document.getElementById("date").innerHTML = "<u>Updated "+(d.getHours()-10)+" hour" + letter + " and "+(d.getMinutes()%60) + " minutes ago.</u>";
+		reason = "Because It's <u>" + myObj.features[0].attributes.REASON + "</u>.";
+		if (txt === "Closed"){	
+			document.getElementById("demo").innerHTML = "Closed.";
+			var element = document.getElementById("demo");
+			element.style.color = "rgb(218, 0, 55)";
+			document.getElementById("reason").innerHTML = reason;
+			var link = document.querySelector("link[rel~='icon']");
+			if (!link) {
+				link = document.createElement('link');
+				link.rel = 'icon';
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+			link.href = 'icons/closed.ico';
+			
+
+		} else {
+			document.getElementById("demo").innerHTML = "Open!";
+			var element = document.getElementById("demo");
+			element.style.color = "#77D970";
+			if (rep<1){
+				start();
+				stop();
+				rep=5
+			}
+			var link = document.querySelector("link[rel~='icon']");
+			if (!link) {
+				link = document.createElement('link');
+				link.rel = 'icon';
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+			link.href = 'icons/tick0.ico';
+		}
+	  }
+
+	};
+
+	//xmlhttp.open("GET", "sites.json", true);
+	xmlhttp.open("GET", "https://services1.arcgis.com/okWBWNlpfMx5q1bT/arcgis/rest/services/RoadClosureProdView/FeatureServer/0/query?where=ID%20%3D%20'LPR_019'&outFields=STATUS,REASON,UPDATETIME&returnGeometry=false&outSR=&f=json", true);
+
+	xmlhttp.send();
+
+
+
+}
+</script>
+
+</body>
+</html>
+
