@@ -1,75 +1,30 @@
 <!DOCTYPE html>
-<title>Is Young's Crossing Closed?</title>
 <html>
-<script src="confetti.min.js"></script>
-<style>
-.gradient {
-	background: rgb(23, 23, 23);
-}	
-@font-face {
-  font-family: bolded;
-  src: url("fonts/Nunito-VariableFont_wght.ttf");
-  font-weight: bold;
-  
-  
-}
-@font-face {
-  font-family: normals;
-  src: url("fonts/Nunito-VariableFont_wght.ttf"); 
-  
-}
-.font {
-  font-family: bolded;
-  text-align: center;
-  font-size: 900%;
-  margin-top: -5%;
-  margin-bottom: -0.5%;
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
 
-}
-.font1 {
-  margin-top: -1%;
-  margin-bottom: 3.3%;
-  font-family: bolded;
-  text-align: center;
-  color: white;
-  font-size: 400%;
-}
-.font2 {
-  font-family: normals;
-  text-align: center;
-  color: white;
-  font-size: 210%;
-}
-.font3 {
-  font-family: normals;
-  text-align: center;
-  color: white;
-  font-size: 90%; 
-}
-hr {
-  border:none;
-  border-top:5px dashed whitesmoke;
-  color:whitesmoke;
-  background-color:rgb(23, 23, 23);
-  height:0.1px;
-  width:50%;
-  margin-top: -1%;
-  margin-bottom: 1%;
-}
-</style>
+<title>Is Young's Crossing Closed?</title>
+</head> 
+
 <body class="gradient">
-	<br><br><br>
-<p class="font1">Young's Crossing is</p>
+<br>
 
-	
-<p id="demo" class="font"></p>
+<! start visable text !>
 
-<div id="reason" class="font2">
-</div>	
-<a style="position: absolute; bottom: 20px; margin-left: 45%; margin-right: 44%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
+<div class="container " style="height: 150%;">
+<h1 class="font1" class="text-center">Young's Crossing is</h1> <! Static Title !>
+<h1 id="state" class="font" class="text-center text-break badge bg-primary text-wrap"></h1> <! Prints "Closed." or "Open!" !>
+<div id="reason" class="font2" class="text-center"></div> <! Returns Reason where nessisary !>
+<a style="position: absolute; bottom: 5rem; margin-left: 35%; margin-right: 43%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
+</div>
+<! End Visable Text !>
+
 
 <script>
-
 rep=0
 
 loadXMLDoc();
@@ -110,8 +65,8 @@ function loadXMLDoc() {
 		document.getElementById("date").innerHTML = "<u>Updated "+(d.getHours()-10)+" hour" + letter + " and "+(d.getMinutes()%60) + " minutes ago.</u>";
 		reason = "Because It's <u>" + myObj.features[0].attributes.REASON + "</u>.";
 		if (txt === "Closed"){	
-			document.getElementById("demo").innerHTML = "Closed.";
-			var element = document.getElementById("demo");
+			document.getElementById("state").innerHTML = "Closed.";
+			var element = document.getElementById("state");
 			element.style.color = "rgb(218, 0, 55)";
 			document.getElementById("reason").innerHTML = reason;
 			var link = document.querySelector("link[rel~='icon']");
@@ -124,8 +79,8 @@ function loadXMLDoc() {
 			
 
 		} else {
-			document.getElementById("demo").innerHTML = "Open!";
-			var element = document.getElementById("demo");
+			document.getElementById("state").innerHTML = "Open!";
+			var element = document.getElementById("state");
 			element.style.color = "#77D970";
 			if (rep<1){
 				start();
@@ -153,7 +108,10 @@ function loadXMLDoc() {
 
 }
 </script>
+<script src="confetti.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
-
