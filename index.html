@@ -57,12 +57,12 @@ function loadXMLDoc() {
 		var utcSeconds = time;
 		var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
 		d.setUTCMilliseconds(Date.now()-utcSeconds);
-		if ((d.getHours()-10)==1){
+		if ((d.getHours())==1){
 		letter="";
 		}else{
 		letter="s";
 		}
-		document.getElementById("date").innerHTML = "<u>Updated "+(d.getHours()-10)+" hour" + letter + " and "+(d.getMinutes()%60) + " minutes ago.</u>";
+		document.getElementById("date").innerHTML = "<u>Updated "+(d.getHours())+" hour" + letter + " and "+(d.getMinutes()%60) + " minutes ago.</u>";
 		reason = "Because It's <u>" + myObj.features[0].attributes.REASON + "</u>.";
 		if (txt === "Closed"){	
 			document.getElementById("state").innerHTML = "Closed.";
