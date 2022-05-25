@@ -19,7 +19,7 @@
 <h1 class="font1" class="text-center">Young's Crossing is</h1> <! Static Title !>
 <h1 class="font" id="state" class="text-center text-break bg-primary text-wrap"></h1> <! Prints "Closed." or "Open!" !>
 <div id="reason" class="font2" class="text-center"></div> <! Returns Reason where nessisary !>
-<a style="position: absolute; bottom: 5rem; left:44%; margin-right: 44%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
+<a style="position: absolute; bottom: 5rem; left:42%; margin-right: 45%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
 </div>
 <! End Visable Text !>
 
@@ -98,24 +98,12 @@ function loadXMLDoc() {
 			}
 			link.href = 'icons/tick0.ico';
 		}
-	  }else{
-			document.getElementById("reason").innerHTML = "Experiencing Technical Difficulties";
-			
-			var element = document.getElementById("reason");
-			element.style.color = "rgb(218, 0, 55)";
-			document.getElementById("date").innerHTML = "API_Service_Down ERR#404";
-			if (!link) {
-				link = document.createElement('link');
-				link.rel = 'icon';
-				document.getElementsByTagName('head')[0].appendChild(link);
-			}
-			link.href = 'icons/broken.png';
-		}
+	  }
 
 	};
 
 	//xmlhttp.open("GET", "sites.json", true);
-	xmlhttp.open("GET", "https://services1.arcgis.com/okWBWNlpfMx5q1bT/arcgis/rest/services/RoadClosureProdView/FeatureServer/0/query?where=ID%20%3D%20'LPR_019'&outFields=STATUS,REASON,UPDATETIME&returnGeometry=false&outSR=&f=json", true);
+	xmlhttp.open("GET", "https://services-ap1.arcgis.com/152ojN3Ts9H3cdtl/arcgis/rest/services/RoadClosureProdView/FeatureServer/0/query?where=ID%20%3D%20'LPR_019'&outFields=UPDATETIME,SOURCE,STATUS,REASON&outSR=4326&f=json", true);
 
 	xmlhttp.send();
 
