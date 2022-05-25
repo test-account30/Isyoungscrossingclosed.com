@@ -17,7 +17,7 @@
 
 <div class="container " style="height: 150%;">
 <h1 class="font1" class="text-center">Young's Crossing is</h1> <! Static Title !>
-<h1 id="state" class="font" class="text-center text-break badge bg-primary text-wrap"></h1> <! Prints "Closed." or "Open!" !>
+<h1 class="font" id="state" class="text-center text-break bg-primary text-wrap"></h1> <! Prints "Closed." or "Open!" !>
 <div id="reason" class="font2" class="text-center"></div> <! Returns Reason where nessisary !>
 <a style="position: absolute; bottom: 5rem; left:44%; margin-right: 44%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
 </div>
@@ -78,8 +78,9 @@ function loadXMLDoc() {
 			link.href = 'icons/closed.ico';
 			
 
-		} else {
+		} else if (txt === "Open") {
 			document.getElementById("state").innerHTML = "Open!";
+			document.getElementById("reason").innerHTML = "";
 			var element = document.getElementById("state");
 			element.style.color = "#77D970";
 			if (rep<1){
@@ -95,7 +96,13 @@ function loadXMLDoc() {
 			}
 			link.href = 'icons/tick0.ico';
 		}
-	  }
+	  }else{
+			document.getElementById("reason").innerHTML = "Experiencing Technical Difficulties";
+			
+			var element = document.getElementById("reason");
+			element.style.color = "rgb(218, 0, 55)";
+			document.getElementById("date").innerHTML = "API_Service_Down ERR#404";
+		}
 
 	};
 
