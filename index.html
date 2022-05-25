@@ -69,6 +69,8 @@ function loadXMLDoc() {
 			var element = document.getElementById("state");
 			element.style.color = "rgb(218, 0, 55)";
 			document.getElementById("reason").innerHTML = reason;
+			var element = document.getElementById("reason");
+			element.style.color = "white";
 			var link = document.querySelector("link[rel~='icon']");
 			if (!link) {
 				link = document.createElement('link');
@@ -102,6 +104,12 @@ function loadXMLDoc() {
 			var element = document.getElementById("reason");
 			element.style.color = "rgb(218, 0, 55)";
 			document.getElementById("date").innerHTML = "API_Service_Down ERR#404";
+			if (!link) {
+				link = document.createElement('link');
+				link.rel = 'icon';
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+			link.href = 'icons/broken.png';
 		}
 
 	};
