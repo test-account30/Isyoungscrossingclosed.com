@@ -1,8 +1,8 @@
 
 
 @media (min-width: 600px) {
-	body {
-		font-size: 120%;
+	font {
+		font-size: 500%;
 	}
 	.font3 {
 	  font-family: normals;
@@ -22,9 +22,9 @@
 	 margin:0;
 	}
       
-    body {
+    font {
      padding:0;
-	 font-size: 90%;
+     font-size: 350%;
     }
 	
 	.font3 {
@@ -94,7 +94,7 @@
   /* margin-bottom: 3.3%; */
   font-family: bolded;
   text-align: center;
-  font-size: 1200%;
+
 
 }
 .font1 {
