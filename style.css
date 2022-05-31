@@ -1,14 +1,22 @@
 
 
 @media (min-width: 600px) {
-	body {
-		font-size: 120%;
+	
+	
+	
+	.font {
+	  /* margin-top: -1%; */
+	  /* margin-bottom: 3.3%; */
+	  font-family: bolded;
+	  text-align: center;
+	  font-size: 1200%;
+
 	}
 	.font3 {
 	  font-family: normals;
 	  text-align: center;
 	  color: white;
-	  font-size: 160%; 
+	  font-size: 120%; 
 	  bottom:20px;
 	  margin-top:25rem;
 	}
@@ -24,14 +32,22 @@
       
     body {
      padding:0;
-	 font-size: 90%;
     }
+	
+	.font {
+	  /* margin-top: -1%; */
+	  /* margin-bottom: 3.3%; */
+	  font-family: bolded;
+	  text-align: center;
+	  font-size: 900%;
+
+	}
 	
 	.font3 {
 	  font-family: normals;
 	  text-align: center;
 	  color: white;
-	  font-size: 90%; 
+	  font-size: 60%; 
 	  bottom:20px;
 	  margin-top:25rem;
 	}
@@ -45,6 +61,37 @@
   	}
 }
 
+@media (min-height: 500px) {
+
+	.font3 {
+	  font-family: normals;
+	  text-align: center;
+	  color: white;
+	  font-size: 120%; 
+	  bottom:20px;
+	  margin-top:25rem;
+	}
+
+	
+}
+
+@media (max-height: 499px) {
+
+      
+	
+	.font3 {
+	  font-family: normals;
+	  text-align: center;
+	  color: white;
+	  font-size: 0%; 
+	  bottom:20px;
+	  margin-top:25rem;
+	}
+
+  
+
+
+}
 
 
 
@@ -64,14 +111,7 @@
   src: url("fonts/Nunito-VariableFont_wght.ttf"); 
   
 }
-.font {
-  /* margin-top: -1%; */
-  /* margin-bottom: 3.3%; */
-  font-family: bolded;
-  text-align: center;
-  font-size: 1200%;
 
-}
 .font1 {
   /* margin-top: -1%; */
   /* margin-bottom: 3.3%; */
