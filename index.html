@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+
+<title>Is Young's Crossing Closed?</title>
+</head> 
+
+<body class="gradient">
+<br>
+
+<! start visable text !>
+
+<div class="container " style="height: 150%;">
+<h1 class="font1" class="text-center">Young's Crossing is</h1> <! Static Title !>
+<h1 class="font" id="state" class="text-center text-break bg-primary text-wrap"></h1> <! Prints "Closed." or "Open!" !>
+<div id="reason" class="font2" class="text-center"></div> <! Returns Reason where nessisary !>
+<a style="position: absolute; bottom: 5rem; left:44%; margin-right: 44%;" id="date" class="font3" href="https://datahub.moretonbay.qld.gov.au/datasets/MBRC::moreton-bay-regional-council-weather-impacted-road-closures-open/explore"></a>
+</div>
+<! End Visable Text !>
+
+
+<script>
+rep=0
+
+loadXMLDoc();
+setInterval(loadXMLDoc, 2000); // 2 seconds.
+
+const start = () => {
+	setTimeout(function() {
+		confetti.start()
+	}, 800);
+};
+
+//  Stop
+
+const stop = () => {
+	setTimeout(function() {
+		confetti.stop()
+	}, 3000);
+};
+function loadXMLDoc() {
+	var xmlhttp = new XMLHttpRequest();
+	txt="";
+
+	xmlhttp.onreadystatechange = function() {
+
+	  if (this.readyState == 4 && this.status == 200) {
+		myObj = JSON.parse(this.responseText);
+		var i;
+		txt = myObj.features[0].attributes.STATUS;
+		time = myObj.features[0].attributes.UPDATETIME;
+		var utcSeconds = time;
+		var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		d.setUTCMilliseconds(Date.now()-utcSeconds);
+		if ((d.getHours())==1){
+		letter="";
+		}else{
+		letter="s";
+		}
+		document.getElementById("date").innerHTML = "<u>Updated "+(d.getHours())+" hour" + letter + " and "+(d.getMinutes()%60) + " minutes ago.</u>";
+		reason = "Because It's <u>" + myObj.features[0].attributes.REASON + "</u>.";
+		if (txt === "Closed"){	
+			document.getElementById("state").innerHTML = "Closed.";
+			var element = document.getElementById("state");
+			element.style.color = "rgb(218, 0, 55)";
+			document.getElementById("reason").innerHTML = reason;
+			var element = document.getElementById("reason");
+			element.style.color = "white";
+			var link = document.querySelector("link[rel~='icon']");
+			if (!link) {
+				link = document.createElement('link');
+				link.rel = 'icon';
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+			link.href = 'icons/closed.ico';
+			
+
+		} else if (txt === "Open") {
+			document.getElementById("state").innerHTML = "Open!";
+			document.getElementById("reason").innerHTML = "";
+			var element = document.getElementById("state");
+			element.style.color = "#77D970";
+			if (rep<1){
+				start();
+				stop();
+				rep=5
+			}
+			var link = document.querySelector("link[rel~='icon']");
+			if (!link) {
+				link = document.createElement('link');
+				link.rel = 'icon';
+				document.getElementsByTagName('head')[0].appendChild(link);
+			}
+			link.href = 'icons/tick0.ico';
+		}
+	  }
+
+	};
+
+	//xmlhttp.open("GET", "sites.json", true);
+	xmlhttp.open("GET", "https://services-ap1.arcgis.com/152ojN3Ts9H3cdtl/arcgis/rest/services/RoadClosureProdView/FeatureServer/0/query?where=ID%20%3D%20'LPR_019'&outFields=UPDATETIME,SOURCE,STATUS,REASON&outSR=4326&f=json", true);
+
+	xmlhttp.send();
+
+
+
+}
+</script>
+<script src="confetti.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
